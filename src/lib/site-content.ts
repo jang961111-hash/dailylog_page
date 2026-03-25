@@ -14,7 +14,7 @@ export const heroHighlights = [
 export const heroStats = [
   { label: "체크인 시간", value: "3~5분" },
   { label: "핵심 루프", value: "4단계" },
-  { label: "현재 배포", value: "Android Demo" },
+  { label: "현재 배포", value: "Android APK" },
 ] as const;
 
 export const problemPoints = [
@@ -269,7 +269,7 @@ export const faqs = [
   {
     question: "지금 바로 설치 가능한 플랫폼은 무엇인가요?",
     answer:
-      "현재는 Android 데모 APK가 준비되어 있습니다. iPhone용 TestFlight 또는 App Store 배포는 준비가 끝나는 대로 연결할 예정입니다.",
+      "현재는 Android 공개 APK가 준비되어 있습니다. iPhone용 TestFlight 또는 App Store 배포는 준비가 끝나는 대로 연결할 예정입니다.",
   },
   {
     question: "Daily Log에서 가장 중요한 경험은 무엇인가요?",
@@ -297,7 +297,7 @@ export const downloadNotes = [
   {
     title: "Android 우선 배포",
     description:
-      "현재 데모 체험은 Android APK 중심으로 제공됩니다. 사용자는 가장 짧은 경로로 실제 제품 흐름을 경험할 수 있습니다.",
+      "현재 공개 체험은 Android APK 중심으로 제공됩니다. 사용자는 가장 짧은 경로로 실제 제품 흐름을 경험할 수 있습니다.",
   },
   {
     title: "Desktop에서는 QR로 연결",
@@ -318,7 +318,7 @@ export const installSteps = [
   },
   {
     title: "2. APK 내려받기",
-    description: "Android 데모 설치 버튼을 눌러 APK 파일을 내려받습니다.",
+    description: "Android APK 다운로드 버튼을 눌러 GitHub Releases에서 APK 파일을 내려받습니다.",
   },
   {
     title: "3. 설치 권한 허용",

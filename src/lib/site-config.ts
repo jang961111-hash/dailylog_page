@@ -11,12 +11,16 @@ type DownloadTarget = {
   download?: boolean;
 };
 
+const androidReleaseTag = "android-demo-v0.1.0";
+const androidReleaseAssetName = "DailyLog.apk";
+const androidReleaseAssetUrl = `https://github.com/jang961111-hash/dailylog_page/releases/download/${androidReleaseTag}/${androidReleaseAssetName}`;
+
 export const siteConfig = {
   name: "Daily Log",
   shortName: "Daily Log",
   tagline: "대화로 하루를 기록하고, 감정을 읽고, 다음 행동까지 이어주는 AI 라이프로그",
   description:
-    "Daily Log는 3~5분 대화형 체크인으로 하루를 정리하고, 감정 분석과 행동 추천까지 연결하는 모바일 중심 서비스입니다.",
+    "Daily Log는 3~5분 대화형 체크인으로 하루를 정리하고, 감정 분석과 다음 행동 추천까지 이어주는 모바일 중심 서비스입니다.",
   baseUrl: "https://dailylog.app",
   ogImage: "/images/app-home.png",
   qrPath: "/download",
@@ -24,35 +28,35 @@ export const siteConfig = {
   contactEmail: "support@dailylog.app",
   legalUpdatedAt: "2026-03-25",
   supportResponseTime: "영업일 기준 1~2일",
-  releaseStatus: "demo" as ReleaseStatus,
+  releaseStatus: "live" as ReleaseStatus,
   release: {
-    badge: "Android Demo",
-    versionLabel: "Demo APK v0.1",
+    badge: "Android APK",
+    versionLabel: "DailyLog APK v0.1.0",
     supportedOs: "Android 10 이상 권장",
-    fileSize: "약 42.7MB",
+    fileSize: "약 323MB",
     lastUpdated: "2026-03-25",
   },
   downloads: {
     androidApk: {
-      status: "demo",
-      href: "/downloads/dailylog-demo.apk",
-      label: "Android 데모 설치",
-      description: "APK를 바로 내려받아 Daily Log의 핵심 체크인 흐름을 체험합니다.",
+      status: "live",
+      href: androidReleaseAssetUrl,
+      label: "Android APK 다운로드",
+      description: "GitHub Releases에서 Daily Log APK를 바로 내려받아 핵심 체크인 흐름을 체험할 수 있습니다.",
       ctaId: "android-apk",
-      download: true,
+      download: false,
     } satisfies DownloadTarget,
     androidPlay: {
       status: "comingSoon",
       href: null,
       label: "Play Store 준비 중",
-      description: "정식 배포 채널은 출시 시점에 연결됩니다.",
+      description: "정식 배포 채널은 추후 Play Store 연결로 전환할 예정입니다.",
       ctaId: "android-play",
     } satisfies DownloadTarget,
     ios: {
       status: "comingSoon",
       href: null,
       label: "iPhone 출시 예정",
-      description: "TestFlight 또는 App Store 링크가 준비되면 이곳에 연결됩니다.",
+      description: "TestFlight 또는 App Store 링크가 준비되는 대로 연결합니다.",
       ctaId: "ios",
     } satisfies DownloadTarget,
   },
