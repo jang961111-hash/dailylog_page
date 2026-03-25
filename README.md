@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Daily Log Landing Page
 
-## Getting Started
+Daily Log의 대외용 랜딩 웹사이트입니다. 이 프로젝트는 모바일 앱 본서비스를 대체하는 웹앱이 아니라, 서비스 소개, 신뢰 형성, Android 설치 유도, 정책 및 지원 허브 역할을 담당합니다.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Next.js 16 App Router
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- react-qr-code
+
+## Pages
+
+- `/` : 메인 랜딩 페이지
+- `/download` : Android 설치 유도 및 디바이스별 다운로드 허브
+- `/roadmap` : 제품 가치와 다음 단계 로드맵
+- `/support` : 설치, 계정, 삭제 요청, 문의 안내
+- `/privacy` : 개인정보처리방침 초안
+- `/terms` : 이용약관 초안
+
+## Project Structure
+
+```text
+src/
+  app/          App Router page routes and metadata
+  components/   Shared landing UI components
+  lib/          Site config and content contracts
+  assets/       Local fonts and visual assets
+public/
+  images/       App screenshots used in the landing site
+  downloads/    Demo APK asset
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+브라우저에서 `http://localhost:3000`으로 확인할 수 있습니다.
 
-## Learn More
+## Production Notes
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Android APK는 현재 데모용 파일을 사용합니다.
+- iOS 다운로드는 실제 링크 연결 전까지 `준비 중` 상태로 표시됩니다.
+- 개인정보처리방침과 이용약관은 공개 전 최종 운영 문구로 교체해야 합니다.
+- 실제 운영 시에는 APK를 Git 저장소보다 GitHub Releases 또는 별도 스토리지로 옮기는 것을 권장합니다.

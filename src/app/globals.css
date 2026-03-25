@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-surface: #f7f1e8;
+  --color-cream-0: #fffaf3;
+  --color-cream-1: #f6efe6;
+  --color-sand-100: #f2e3cf;
+  --color-sand-200: #e7cfb2;
+  --color-sand-500: #c78d61;
+  --color-sand-600: #9f6f49;
+  --color-sand-700: #704f36;
+  --color-line: #dfc7ab;
+  --color-ink: #2b2620;
+  --color-muted: #66584a;
+  --color-panel: rgba(255, 255, 255, 0.86);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 251, 246, 0.98), transparent 40%),
+    linear-gradient(180deg, #f7f1e8 0%, #fbf8f3 52%, #f6efe6 100%);
+  color: var(--color-ink);
+  font-family: var(--font-body), serif;
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  position: relative;
+}
+
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+li {
+  text-wrap: pretty;
+}
+
+.font-display {
+  font-family: var(--font-heading), serif;
+}
+
+.font-accent {
+  font-family: var(--font-accent), sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--color-sand-500);
+  outline-offset: 3px;
+}
+
+img {
+  display: block;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+::selection {
+  background: rgba(199, 141, 97, 0.28);
+  color: var(--color-ink);
+}
+
+@keyframes float-card {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 18px 40px rgba(199, 141, 97, 0.18);
+  }
+  50% {
+    box-shadow: 0 24px 50px rgba(199, 141, 97, 0.26);
+  }
+}
+
+.floating-card {
+  animation: float-card 7s ease-in-out infinite;
+}
+
+.glow-card {
+  animation: pulse-glow 6s ease-in-out infinite;
 }
