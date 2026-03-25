@@ -55,7 +55,7 @@ export default function HomePage() {
                   data-cta-id="hero-android-apk"
                   className="glow-card inline-flex items-center justify-center rounded-full bg-[color:var(--color-ink)] px-6 py-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-[color:var(--color-sand-700)]"
                 >
-                  Android 데모 설치
+                  Android APK 다운로드
                 </a>
                 <Link
                   href="#how-it-works"
@@ -374,7 +374,7 @@ export default function HomePage() {
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">Demo status</p>
                 <h2 className="font-display mt-4 text-4xl leading-none">정직한 데모 표기와 운영형 구조를 함께 유지합니다.</h2>
                 <p className="mt-4 text-sm leading-8 text-white/80">
-                  현재는 Android 데모 중심의 배포지만, 정책과 지원, 설치 안내를 정식 서비스처럼 정리해 사용자 신뢰를 해치지 않도록 구성했습니다.
+                  현재는 Android 공개 APK 중심의 배포지만, 정책과 지원, 설치 안내를 정식 서비스처럼 정리해 사용자 신뢰를 해치지 않도록 구성했습니다.
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
                   <Link href="/privacy" className="rounded-full bg-white/10 px-4 py-2 text-sm text-white transition hover:bg-white/16">
@@ -442,7 +442,7 @@ export default function HomePage() {
                   설치 흐름은 충분히 분명하게.
                 </h2>
                 <p className="text-sm leading-8 text-[color:var(--color-muted)]">
-                  Daily Log의 Android 데모 설치, 지원 페이지, 정책 문서를 한 번에 확인할 수 있습니다. 지금은 데모지만, 공개형 서비스처럼 다듬은 랜딩 구조를 기준으로 설계했습니다.
+                  Daily Log의 Android APK 다운로드, 지원 페이지, 정책 문서를 한 번에 확인할 수 있습니다. 지금은 공개 APK 중심 배포 단계이며, 공개형 서비스처럼 다듬은 랜딩 구조를 기준으로 설계했습니다.
                 </p>
               </div>
               <DeviceDownloadHub compact className="bg-white/95" />

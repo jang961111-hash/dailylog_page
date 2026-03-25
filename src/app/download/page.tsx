@@ -5,7 +5,7 @@ import { downloadNotes, faqs, installSteps, troubleshooting } from "@/lib/site-c
 
 export const metadata = buildMetadata({
   title: "다운로드",
-  description: "Android 데모 설치, QR 연결, 지원 OS, 설치 가이드를 한 번에 확인할 수 있는 Daily Log 다운로드 페이지입니다.",
+  description: "Android APK 다운로드, QR 연결, 지원 OS, 설치 가이드를 한 번에 확인할 수 있는 Daily Log 다운로드 페이지입니다.",
   path: "/download",
 });
 

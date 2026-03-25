@@ -119,7 +119,7 @@ export function DeviceDownloadHub({
     device === "ios"
       ? {
           label: "iPhone 출시 예정",
-          description: "현재는 Android 데모 중심으로 제공되며, iPhone 배포 채널은 준비 중입니다.",
+          description: "현재는 Android 공개 APK 중심으로 제공되며, iPhone 배포 채널은 준비 중입니다.",
           status: siteConfig.downloads.ios.status,
           href: siteConfig.downloads.ios.href,
           buttonId: siteConfig.downloads.ios.ctaId,

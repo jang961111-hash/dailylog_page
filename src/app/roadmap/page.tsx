@@ -192,7 +192,7 @@ export default function RoadmapPage() {
                   href="/download"
                   className="inline-flex rounded-full bg-[color:var(--color-ink)] px-5 py-3 text-sm font-medium text-white transition hover:bg-[color:var(--color-sand-700)]"
                 >
-                  데모 설치하기
+                  APK 다운로드
                 </Link>
                 <Link
                   href="/support"
