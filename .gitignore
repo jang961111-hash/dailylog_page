@@ -28,6 +28,7 @@
 .tmp-run/
 output/
 /DailyLog*.apk
+/release-assets/apk/*.apk
 
 # debug
 npm-debug.log*

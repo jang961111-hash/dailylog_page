@@ -1,36 +1,37 @@
 import { PageCta, PageIntro, SiteFooter, SiteHeader } from "@/components/site-shell";
+import { termsSectionsEn } from "@/lib/content/legal-content-en";
 import { buildMetadata, siteConfig } from "@/lib/site-config";
-import { termsSections } from "@/lib/site-content";
 
 export const metadata = buildMetadata({
-  title: "이용약관",
-  description: "Daily Log 데모 버전의 이용약관 초안을 확인할 수 있는 페이지입니다.",
-  path: "/terms",
+  title: "Terms of Service",
+  description: "Read the current draft Terms of Service for the Daily Log demo website and demo app.",
+  path: "/en/terms",
+  locale: "en",
 });
 
-export default function TermsPage() {
+export default function EnglishTermsPage() {
   return (
     <div className="min-h-screen">
       <SiteHeader />
 
-      <main className="reading-surface flex-1">
+      <main lang="en" className="reading-surface flex-1">
         <PageIntro
           eyebrow="Terms"
-          title="Daily Log 이용약관 초안"
-          description="이 문서는 데모 릴리스와 랜딩 공개를 위해 정리한 초안입니다. 실제 운영 범위, 책임 제한, 계정 정책이 확정되면 최종 약관으로 교체되어야 합니다."
+          title="Daily Log Terms of Service draft"
+          description="This document is a draft prepared for the demo release and landing site. Once the real service scope, responsibility model, and account policy are finalized, it should be replaced with the production terms."
           aside={
             <div className="grid gap-4">
               <div className="surface-card rounded-[1.8rem] p-6">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-primary)]">Document Status</p>
-                <p className="mt-4 font-display text-4xl font-semibold tracking-[-0.05em] text-[color:var(--color-ink)]">데모 기준 초안</p>
+                <p className="mt-4 font-display text-4xl font-semibold tracking-[-0.05em] text-[color:var(--color-ink)]">Draft for demo release</p>
                 <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">
-                  정식 공개 전 최종 약관으로 교체가 필요합니다.
+                  A final legal version is still required before launch.
                   <br />
-                  문의 {siteConfig.contactEmail}
+                  Contact {siteConfig.contactEmail}
                 </p>
               </div>
               <div className="surface-card-soft rounded-[1.8rem] p-6 text-sm leading-7 text-[color:var(--color-muted)]">
-                서비스 범위, 책임 제한, 정책 변경 고지 방식, 이용 제한 조건은 실제 운영안에 맞춰 다시 검토해야 합니다.
+                The service definition, liability language, usage restrictions, and policy-change notices still need one more pass against the real operating model.
               </div>
             </div>
           }
@@ -39,10 +40,10 @@ export default function TermsPage() {
         <section className="px-6 py-12">
           <div className="mx-auto grid w-full max-w-4xl gap-5">
             <div className="rounded-[1.5rem] border border-dashed border-[color:var(--color-line)] bg-[color:var(--color-surface-alt)]/72 px-5 py-5 text-sm leading-7 text-[color:var(--color-muted)]">
-              현재 문서는 구조를 먼저 정리한 초안입니다. 실제 서비스의 정의, 이용 제한, 책임 범위, 공지 절차는 운영 형태에 맞춰 재검토가 필요합니다.
+              This is still a structural draft. The real service definition, usage restrictions, liability limits, and announcement procedures should be reviewed again before launch.
             </div>
 
-            {termsSections.map((section) => (
+            {termsSectionsEn.map((section) => (
               <article key={section.title} className="surface-card rounded-[1.8rem] px-6 py-6">
                 <h2 className="font-display text-3xl font-semibold tracking-[-0.04em] text-[color:var(--color-ink)]">{section.title}</h2>
                 <div className="mt-4 space-y-4 text-sm leading-8 text-[color:var(--color-muted)]">
@@ -66,7 +67,7 @@ export default function TermsPage() {
             ))}
 
             <div className="surface-card rounded-[1.6rem] px-6 py-6 text-sm leading-8 text-[color:var(--color-muted)]">
-              문의 메일:{" "}
+              Contact:{" "}
               <a href={`mailto:${siteConfig.contactEmail}`} className="font-semibold text-[color:var(--color-ink)]">
                 {siteConfig.contactEmail}
               </a>
@@ -75,17 +76,18 @@ export default function TermsPage() {
         </section>
 
         <PageCta
+          locale="en"
           eyebrow="Policy Navigation"
-          title="약관 페이지에서도 지원과 개인정보 문서로 자연스럽게 이어지게 했습니다."
-          description="문서 확인이 끝난 뒤에도 설치/지원 흐름을 잃지 않도록 공통 CTA와 링크 구조를 맞췄습니다."
+          title="The terms page stays connected to privacy and support in the same flow."
+          description="After reading the terms, people can move directly into the privacy or support pages without losing the same trust-oriented structure."
           primaryHref="/privacy"
-          primaryLabel="개인정보처리방침 보기"
+          primaryLabel="Open Privacy"
           secondaryHref="/support"
-          secondaryLabel="지원 보기"
+          secondaryLabel="Open Support"
         />
       </main>
 
-      <SiteFooter />
+      <SiteFooter locale="en" />
     </div>
   );
 }

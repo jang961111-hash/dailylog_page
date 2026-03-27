@@ -1,32 +1,27 @@
 import type { Viewport } from "next";
-import localFont from "next/font/local";
+import { Noto_Sans_KR, Plus_Jakarta_Sans } from "next/font/google";
 
 import { baseMetadata } from "@/lib/site-config";
 import "./globals.css";
 
-const headingFont = localFont({
-  src: "../assets/fonts/cormorant-garamond-variable.ttf",
+const headingFont = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800"],
   variable: "--font-heading",
   display: "swap",
-  weight: "300 700",
 });
 
-const bodyFont = localFont({
-  src: "../assets/fonts/gowun-batang-regular.ttf",
+const bodyFont = Noto_Sans_KR({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
   variable: "--font-body",
-  display: "swap",
-});
-
-const accentFont = localFont({
-  src: "../assets/fonts/preahvihear-regular.ttf",
-  variable: "--font-accent",
   display: "swap",
 });
 
 export const metadata = baseMetadata;
 
 export const viewport: Viewport = {
-  themeColor: "#F7F1E8",
+  themeColor: "#F7F9FF",
   colorScheme: "light",
 };
 
@@ -38,11 +33,13 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${headingFont.variable} ${bodyFont.variable} ${accentFont.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
+      className={`${headingFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-[color:var(--color-surface)] text-[color:var(--color-ink)]">
-        <div className="relative flex min-h-screen flex-col">
-          <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[32rem] bg-[radial-gradient(circle_at_top_left,rgba(249,234,215,0.88),transparent_48%),radial-gradient(circle_at_top_right,rgba(209,164,122,0.14),transparent_30%)]" />
+        <div className="relative flex min-h-screen flex-col overflow-x-clip">
+          <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem] bg-[radial-gradient(circle_at_top_left,rgba(255,239,225,0.72),transparent_34%),radial-gradient(circle_at_top_right,rgba(143,175,255,0.22),transparent_30%)]" />
+          <div className="pointer-events-none absolute bottom-0 left-1/2 -z-10 h-[28rem] w-[78rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(122,99,255,0.08),transparent_60%)] blur-3xl" />
           {children}
         </div>
       </body>

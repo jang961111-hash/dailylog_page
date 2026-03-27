@@ -1,121 +1,131 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { siteConfig } from "@/lib/site-config";
+import { SiteHeaderClient } from "@/components/site-header-client";
+import { siteConfig, siteLocaleCopy, withLocale, type SiteLocale } from "@/lib/site-config";
 
-const navigationItems = [
-  { label: "가치", href: "/#why-daily-log" },
-  { label: "사용 흐름", href: "/#how-it-works" },
-  { label: "다시 열 이유", href: "/#value-loop" },
-  { label: "로드맵", href: "/roadmap" },
-  { label: "FAQ", href: "/#faq" },
-  { label: "다운로드", href: "/download" },
-] as const;
+const footerCopy = {
+  ko: {
+    label: "Daily Log Site",
+    description:
+      "Daily Log 웹사이트는 설치, 지원, 정책, 제품 방향을 한눈에 읽히도록 정리한 공개 허브입니다.",
+    checklistItems: [
+      "최종 도메인과 사이트 주소",
+      "문의 메일 또는 문의 폼",
+      "Play Store / App Store 배포 링크",
+      "최종 정책 문안과 공유용 이미지",
+    ],
+    quickLinks: "바로 가기",
+    quickLinkItems: [
+      { href: "/download", label: "다운로드" },
+      { href: "/roadmap", label: "로드맵" },
+      { href: "/support", label: "지원" },
+      { href: "/privacy", label: "개인정보처리방침" },
+      { href: "/terms", label: "이용약관" },
+    ],
+    operations: "운영 정보",
+    contact: "문의 메일",
+    responseTime: "응답 시간",
+    legalDate: "문서 기준일",
+    launchChecklist: "런치 전 점검",
+  },
+  en: {
+    label: "Daily Log Site",
+    description:
+      "The Daily Log website is the public hub for install guidance, support, policies, and the product direction in one readable flow.",
+    checklistItems: [
+      "Final production domain and URLs",
+      "Support email or contact form",
+      "Play Store and App Store release links",
+      "Final legal copy and share assets",
+    ],
+    quickLinks: "Quick links",
+    quickLinkItems: [
+      { href: "/download", label: "Download" },
+      { href: "/roadmap", label: "Roadmap" },
+      { href: "/support", label: "Support" },
+      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/terms", label: "Terms of Service" },
+    ],
+    operations: "Operations",
+    contact: "Support email",
+    responseTime: "Response time",
+    legalDate: "Document date",
+    launchChecklist: "Pre-launch checks",
+  },
+} as const;
 
 export function SiteHeader() {
-  return (
-    <header className="sticky top-0 z-50 border-b border-black/5 bg-[color:var(--color-surface)]/80 backdrop-blur-xl">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-6 py-4">
-        <Link href="/" className="flex items-center gap-3">
-          <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#f5e7d4,#fffdf8)] shadow-[0_16px_36px_rgba(91,63,37,0.12)] ring-1 ring-[color:var(--color-line)]">
-            <span className="font-display text-xl leading-none text-[color:var(--color-ink)]">DL</span>
-          </span>
-          <span className="flex flex-col gap-1">
-            <span className="flex items-center gap-2">
-              <span className="font-display text-[1.75rem] leading-none text-[color:var(--color-ink)]">
-                {siteConfig.name}
-              </span>
-              <span className="hidden rounded-full bg-[color:var(--color-sand-100)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-sand-700)] sm:inline-flex">
-                {siteConfig.release.badge}
-              </span>
-            </span>
-            <span className="hidden text-xs tracking-[0.16em] text-[color:var(--color-muted)] md:block">
-              {siteConfig.tagline}
-            </span>
-          </span>
-        </Link>
-
-        <nav className="hidden items-center gap-6 text-sm text-[color:var(--color-muted)] xl:flex">
-          {navigationItems.map((item) => (
-            <Link key={item.href} href={item.href} className="transition hover:text-[color:var(--color-ink)]">
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <Link
-            href="/support"
-            className="hidden rounded-full px-4 py-2 text-sm font-medium text-[color:var(--color-muted)] transition hover:bg-white/70 hover:text-[color:var(--color-ink)] md:inline-flex"
-          >
-            지원
-          </Link>
-          <a
-            href={siteConfig.downloads.androidApk.href ?? "/download"}
-            download={siteConfig.downloads.androidApk.download}
-            data-cta-id="header-android-apk"
-            className="inline-flex items-center justify-center rounded-full bg-[color:var(--color-ink)] px-4 py-2.5 text-sm font-medium text-white shadow-[0_18px_36px_rgba(43,38,32,0.18)] transition hover:-translate-y-0.5 hover:bg-[color:var(--color-sand-700)]"
-          >
-            Android 설치
-          </a>
-        </div>
-      </div>
-    </header>
-  );
+  return <SiteHeaderClient />;
 }
 
-export function SiteFooter() {
+export function SiteFooter({ locale = "ko" }: { locale?: SiteLocale }) {
+  const copy = footerCopy[locale];
+  const localizedSiteCopy = siteLocaleCopy[locale];
+
   return (
-    <footer className="mt-20 border-t border-black/5 bg-white/75">
-      <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
-        <div className="space-y-4">
-          <div className="space-y-3">
-            <div className="inline-flex rounded-full bg-[color:var(--color-sand-100)] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--color-sand-700)]">
-              {siteConfig.release.badge}
+    <footer
+      lang={locale}
+      className="mt-24 border-t border-white/8 bg-[radial-gradient(circle_at_top,rgba(122,99,255,0.18),transparent_32%),linear-gradient(180deg,#13192d_0%,#0a0f1d_100%)] text-white"
+    >
+      <div className="mx-auto grid w-full max-w-7xl gap-10 px-6 py-14 lg:grid-cols-[1.1fr_0.7fr_0.9fr]">
+        <div className="space-y-5">
+          <div className="space-y-4">
+            <div className="inline-flex rounded-full border border-white/12 bg-white/8 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/72">
+              {copy.label}
             </div>
-            <h2 className="font-display text-4xl leading-none text-[color:var(--color-ink)]">{siteConfig.name}</h2>
-            <p className="max-w-xl text-sm leading-8 text-[color:var(--color-muted)]">
-              {siteConfig.tagline}. 웹은 서비스 소개와 설치 유도, 정책과 지원 허브에 집중하고, 실제 승부는 모바일 앱의 재방문성과 누적 가치에서 만들어집니다.
-            </p>
+            <div>
+              <h2 className="font-display text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">{siteConfig.name}</h2>
+              <p className="copy-readable mt-4 text-sm text-white/68">{copy.description}</p>
+            </div>
           </div>
-          <div className="rounded-[1.4rem] border border-[color:var(--color-line)] bg-[color:var(--color-cream-0)] px-4 py-4 text-sm leading-7 text-[color:var(--color-muted)]">
-            <strong className="text-[color:var(--color-ink)]">정식 공개 전 교체 예정 항목</strong>
-            <p className="mt-2">
-              도메인, 문의 채널, 배포 링크, 정책 최종 문구, OG 이미지와 앱 아이콘은 실제 운영 값으로 교체해야 합니다.
-            </p>
+
+          <div className="rounded-[1.6rem] border border-white/10 bg-white/6 p-5 text-sm leading-7 text-white/68">
+            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/62">{copy.launchChecklist}</p>
+            <ul className="mt-4 grid gap-3">
+              {copy.checklistItems.map((item) => (
+                <li key={item} className="rounded-[1rem] border border-white/8 bg-white/6 px-4 py-3">
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--color-sand-600)]">Explore</p>
-          <div className="flex flex-col gap-3 text-sm text-[color:var(--color-muted)]">
-            <Link href="/download">다운로드</Link>
-            <Link href="/roadmap">제품 로드맵</Link>
-            <Link href="/support">지원</Link>
-            <Link href="/privacy">개인정보처리방침</Link>
-            <Link href="/terms">이용약관</Link>
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/62">{copy.quickLinks}</p>
+          <div className="grid gap-3 text-sm text-white/72">
+            {copy.quickLinkItems.map((item) => (
+              <Link
+                key={item.href}
+                href={withLocale(item.href, locale)}
+                className="rounded-[1rem] border border-white/8 bg-white/6 px-4 py-3 transition hover:bg-white/10"
+              >
+                {item.label}
+              </Link>
+            ))}
           </div>
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--color-sand-600)]">Operations</p>
-          <div className="space-y-3 text-sm leading-7 text-[color:var(--color-muted)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/62">{copy.operations}</p>
+          <div className="rounded-[1.6rem] border border-white/10 bg-white/6 p-5 text-sm leading-7 text-white/72">
             <p>
-              문의 채널
+              {copy.contact}
               <br />
-              <a href={`mailto:${siteConfig.contactEmail}`} className="font-medium text-[color:var(--color-ink)]">
+              <a href={`mailto:${siteConfig.contactEmail}`} className="font-medium text-white">
                 {siteConfig.contactEmail}
               </a>
             </p>
-            <p>
-              지원 응답 시간
+            <p className="mt-4">
+              {copy.responseTime}
               <br />
-              <span className="font-medium text-[color:var(--color-ink)]">{siteConfig.supportResponseTime}</span>
+              <span className="font-medium text-white">{localizedSiteCopy.supportResponseTime}</span>
             </p>
-            <p>
-              정책 초안 기준일
+            <p className="mt-4">
+              {copy.legalDate}
               <br />
-              <span className="font-medium text-[color:var(--color-ink)]">{siteConfig.legalUpdatedAt}</span>
+              <span className="font-medium text-white">{siteConfig.legalUpdatedAt}</span>
             </p>
           </div>
         </div>
@@ -142,13 +152,9 @@ export function SectionHeading({
 
   return (
     <div className={`flex flex-col gap-4 ${alignment}`}>
-      <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[color:var(--color-sand-600)]">
-        {eyebrow}
-      </p>
-      <h2 className="font-display text-4xl leading-none tracking-[-0.02em] text-[color:var(--color-ink)] sm:text-5xl">
-        {title}
-      </h2>
-      <p className="text-sm leading-8 text-[color:var(--color-muted)] sm:text-base">{description}</p>
+      <p className="eyebrow-label text-[11px] font-semibold uppercase text-[color:var(--color-primary)]">{eyebrow}</p>
+      <h2 className="display-heading font-display text-4xl font-semibold text-[color:var(--color-ink)] sm:text-5xl">{title}</h2>
+      <p className="copy-readable text-sm text-[color:var(--color-muted)] sm:text-base">{description}</p>
     </div>
   );
 }
@@ -158,26 +164,79 @@ export function PageIntro({
   title,
   description,
   aside,
+  actions,
 }: {
   eyebrow: string;
   title: string;
   description: string;
   aside?: ReactNode;
+  actions?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden px-6 pb-8 pt-14 sm:pt-20">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[22rem] bg-[radial-gradient(circle_at_top_left,rgba(249,234,215,0.95),transparent_55%),radial-gradient(circle_at_top_right,rgba(207,160,117,0.18),transparent_34%)]" />
-      <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-        <div className="space-y-5">
-          <div className="inline-flex rounded-full border border-[color:var(--color-line)] bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.26em] text-[color:var(--color-sand-700)]">
+    <section className="page-band relative overflow-hidden px-6 pb-12 pt-14 sm:pt-20">
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[28rem] bg-[radial-gradient(circle_at_top_right,rgba(122,99,255,0.14),transparent_30%),radial-gradient(circle_at_top_left,rgba(255,236,219,0.84),transparent_40%)]" />
+      <div className="mx-auto grid w-full max-w-7xl gap-8 lg:grid-cols-[1.04fr_0.96fr] lg:items-start">
+        <div className="reveal-block space-y-6 pt-3">
+          <div className="inline-flex rounded-full border border-[color:var(--color-line)] bg-white/78 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-primary)]">
             {eyebrow}
           </div>
-          <h1 className="font-display text-5xl leading-none tracking-[-0.03em] text-[color:var(--color-ink)] sm:text-6xl">
+          <h1 className="display-hero max-w-[13ch] font-display text-5xl font-semibold text-[color:var(--color-ink)] sm:text-6xl lg:text-7xl">
             {title}
           </h1>
-          <p className="max-w-2xl text-sm leading-8 text-[color:var(--color-muted)] sm:text-base">{description}</p>
+          <p className="copy-readable copy-readable-wide text-sm text-[color:var(--color-muted)] sm:text-base">{description}</p>
+          {actions ? <div className="flex flex-wrap gap-3 pt-1">{actions}</div> : null}
         </div>
-        {aside ? <div>{aside}</div> : null}
+
+        {aside ? <div className="reveal-block reveal-delay-1">{aside}</div> : null}
+      </div>
+    </section>
+  );
+}
+
+export function PageCta({
+  locale = "ko",
+  eyebrow,
+  title,
+  description,
+  primaryHref,
+  primaryLabel,
+  secondaryHref,
+  secondaryLabel,
+}: {
+  locale?: SiteLocale;
+  eyebrow: string;
+  title: string;
+  description: string;
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref: string;
+  secondaryLabel: string;
+}) {
+  return (
+    <section className="px-6 pb-6 pt-8">
+      <div className="surface-card-dark mx-auto w-full max-w-7xl rounded-[2rem] px-6 py-10 text-white md:px-10">
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div className="space-y-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/60">{eyebrow}</p>
+            <h2 className="font-display text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">{title}</h2>
+            <p className="max-w-[58ch] text-sm leading-8 text-white/72">{description}</p>
+          </div>
+
+          <div className="flex flex-wrap gap-3 lg:justify-end">
+            <Link
+              href={withLocale(primaryHref, locale)}
+              className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-[color:var(--color-ink)] transition hover:-translate-y-0.5"
+            >
+              {primaryLabel}
+            </Link>
+            <Link
+              href={withLocale(secondaryHref, locale)}
+              className="button-dark inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition"
+            >
+              {secondaryLabel}
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -185,7 +244,7 @@ export function PageIntro({
 
 export function Pill({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-[color:var(--color-line)] bg-white/85 px-4 py-2 text-xs tracking-[0.16em] text-[color:var(--color-sand-700)] shadow-[0_12px_28px_rgba(96,67,43,0.05)]">
+    <span className="pill-label inline-flex items-center rounded-full border border-[color:var(--color-line)] bg-white/80 px-4 py-2 text-xs text-[color:var(--color-muted-strong)] shadow-[0_16px_34px_rgba(24,36,77,0.04)]">
       {children}
     </span>
   );

@@ -45,10 +45,11 @@ Open `http://localhost:3000` in the browser.
 ## APK Delivery
 
 - The landing site is deployed on Vercel.
-- Download buttons point to `/download/apk`, which serves the newest `DailyLog*.apk` file found in the project root.
+- Download buttons point to `/download/apk`, which serves the newest `DailyLog*.apk` file found in `release-assets/apk`.
 - If no local APK is available, `/download/apk` falls back to the latest GitHub Release APK and then to the last known asset URL.
 - Local APK files such as `DailyLog.apk` or `DailyLog_1.0.2.apk` are release source files only and must not be committed to the repository.
-- When the APK changes locally, place the new `DailyLog*.apk` file in the project root. GitHub Releases remain the fallback delivery path.
+- When the APK changes locally, place the new `DailyLog*.apk` file in `release-assets/apk`. GitHub Releases remain the fallback delivery path.
+- Vercel deployments should exclude `release-assets/` so production deploys stay lightweight and rely on the GitHub fallback when no local APK is bundled.
 
 ## Production Notes
 

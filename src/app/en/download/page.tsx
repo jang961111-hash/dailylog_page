@@ -1,59 +1,61 @@
 import { DeviceDownloadHub } from "@/components/device-download-hub";
 import { PageCta, PageIntro, SectionHeading, SiteFooter, SiteHeader } from "@/components/site-shell";
 import { findLocalAndroidApk } from "@/lib/apk-release";
-import { buildMetadata, siteConfig } from "@/lib/site-config";
-import { downloadNotes, faqs, installSteps, troubleshooting } from "@/lib/site-content";
+import { downloadNotesEn, faqsEn, installStepsEn, troubleshootingEn } from "@/lib/content/support-content-en";
+import { buildMetadata, siteConfig, siteLocaleCopy } from "@/lib/site-config";
 
 export const metadata = buildMetadata({
-  title: "다운로드",
-  description: "Android APK 다운로드, QR 연결, 지원 OS, 설치 가이드를 한 번에 확인할 수 있는 Daily Log 다운로드 페이지입니다.",
-  path: "/download",
+  title: "Download",
+  description:
+    "Download the Daily Log Android APK, scan a QR code from desktop, review supported devices, and follow the install guide in one place.",
+  path: "/en/download",
+  locale: "en",
 });
 
 export const dynamic = "force-dynamic";
 
 function formatPackageSize(bytes: number) {
-  return `${(bytes / 1024 / 1024).toFixed(1)}MB`;
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
 
 function formatPackageUpdatedAt(mtimeMs: number) {
-  return new Intl.DateTimeFormat("ko-KR", {
+  return new Intl.DateTimeFormat("en-US", {
     dateStyle: "medium",
     timeStyle: "short",
   }).format(new Date(mtimeMs));
 }
 
-export default async function DownloadPage() {
+export default async function EnglishDownloadPage() {
   const localApk = await findLocalAndroidApk();
-  const deliverySource = localApk ? "서버에서 직접 제공 중" : "GitHub Releases 대체 경로 사용";
+  const deliverySource = localApk ? "Served directly from this server" : "GitHub Releases fallback route";
   const deliveryLabel = localApk ? localApk.filename : siteConfig.release.versionLabel;
   const deliveryUpdatedAt = localApk ? formatPackageUpdatedAt(localApk.mtimeMs) : siteConfig.release.lastUpdated;
-  const deliverySize = localApk ? formatPackageSize(localApk.size) : siteConfig.release.fileSize;
+  const deliverySize = localApk ? formatPackageSize(localApk.size) : siteLocaleCopy.en.fileSize;
 
   return (
     <div className="min-h-screen">
       <SiteHeader />
 
-      <main className="reading-surface flex-1">
+      <main lang="en" className="reading-surface flex-1">
         <PageIntro
           eyebrow="Download"
-          title="설치 흐름과 현재 배포 상태를 같은 시야 안에 두었습니다."
-          description="이 페이지는 모바일에서는 설치 액션을 먼저, 데스크톱에서는 QR handoff와 배포 상태를 함께 보여줍니다. 준비되지 않은 채널은 상태만 분명하게 안내합니다."
+          title="The install flow and the current release state stay in the same view."
+          description="On mobile, this page leads with the install action. On desktop, it keeps the QR handoff and release state together. Channels that are not ready yet are shown clearly as status only."
           actions={
             <>
               <a
-                href={siteConfig.downloads.androidApk.href ?? "/download"}
+                href={siteConfig.downloads.androidApk.href ?? "/en/download"}
                 download={siteConfig.downloads.androidApk.download}
-                data-cta-id="download-page-hero-apk"
+                data-cta-id="download-page-hero-apk-en"
                 className="button-primary inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition"
               >
-                Android APK 받기
+                Download Android APK
               </a>
               <a
                 href="#install-guide"
                 className="button-secondary inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition"
               >
-                설치 순서 보기
+                View Install Steps
               </a>
             </>
           }
@@ -65,11 +67,11 @@ export default async function DownloadPage() {
                   {siteConfig.release.versionLabel}
                 </p>
                 <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">
-                  {siteConfig.release.supportedOs}
+                  {siteLocaleCopy.en.supportedOs}
                   <br />
-                  패키지 크기 {siteConfig.release.fileSize}
+                  Package size {siteLocaleCopy.en.fileSize}
                   <br />
-                  업데이트 {siteConfig.release.lastUpdated}
+                  Updated {siteConfig.release.lastUpdated}
                 </p>
               </div>
 
@@ -83,17 +85,17 @@ export default async function DownloadPage() {
                 <p className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-white">{deliveryLabel}</p>
                 <div className="mt-4 grid gap-3 text-sm leading-7 text-white/72">
                   <p>
-                    전달 경로
+                    Delivery path
                     <br />
                     <span className="font-medium text-white">{deliverySource}</span>
                   </p>
                   <p>
-                    현재 파일 크기
+                    Current file size
                     <br />
                     <span className="font-medium text-white">{deliverySize}</span>
                   </p>
                   <p>
-                    확인 시점
+                    Verified at
                     <br />
                     <span className="font-medium text-white">{deliveryUpdatedAt}</span>
                   </p>
@@ -105,7 +107,7 @@ export default async function DownloadPage() {
 
         <section className="px-6 py-8">
           <div className="mx-auto w-full max-w-7xl">
-            <DeviceDownloadHub />
+            <DeviceDownloadHub locale="en" />
           </div>
         </section>
 
@@ -113,12 +115,12 @@ export default async function DownloadPage() {
           <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
             <SectionHeading
               eyebrow="Before Install"
-              title="설치 전에 정말 필요한 정보만 먼저 정리했습니다."
-              description="설치를 방해하는 실제 요인만 먼저 보여주고, 나머지 설명은 뒤로 미룹니다. 한눈에 읽히는 속도를 우선한 구성입니다."
+              title="Only the details that actually affect installation come first."
+              description="The page stays focused on what can block installation or change user confidence, and moves the rest of the explanation behind that."
             />
 
             <div className="grid gap-5 lg:grid-cols-3">
-              {downloadNotes.map((item) => (
+              {downloadNotesEn.map((item) => (
                 <article key={item.title} className="surface-card-soft rounded-[1.8rem] p-6">
                   <h2 className="font-display text-3xl font-semibold tracking-[-0.04em] text-[color:var(--color-ink)]">{item.title}</h2>
                   <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">{item.description}</p>
@@ -132,12 +134,12 @@ export default async function DownloadPage() {
           <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
             <SectionHeading
               eyebrow="Install Steps"
-              title="설치 경로는 길지 않아야 하고, 어느 기기에서 봐도 같아야 합니다."
-              description="PC와 모바일 어디서 들어오더라도 같은 목표를 향해 움직이도록 단계를 짧게 유지했습니다."
+              title="The install path should stay short and consistent across devices."
+              description="Whether someone arrives from a desktop browser or a phone, the same goal and the same next step stay visible."
             />
 
             <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
-              {installSteps.map((item, index) => (
+              {installStepsEn.map((item, index) => (
                 <article
                   key={item.title}
                   className={`${index === 1 ? "surface-card-dark text-white" : "surface-card-soft"} rounded-[1.8rem] p-6`}
@@ -159,12 +161,12 @@ export default async function DownloadPage() {
             <div className="space-y-4">
               <SectionHeading
                 eyebrow="Troubleshooting"
-                title="설치가 막히면 가장 먼저 확인할 항목부터 보여줍니다."
-                description="데모 배포 단계에서 자주 발생하는 이슈를 중심으로 스스로 확인 가능한 항목을 우선 정리했습니다."
+                title="When installation fails, the first checks should be easy to spot."
+                description="This section prioritizes the issues that appear most often during demo distribution and starts with the items people can verify on their own."
               />
 
               <div className="grid gap-4">
-                {troubleshooting.map((item) => (
+                {troubleshootingEn.map((item) => (
                   <article key={item.title} className="surface-card-soft rounded-[1.6rem] p-5">
                     <h2 className="font-display text-2xl font-semibold tracking-[-0.04em] text-[color:var(--color-ink)]">{item.title}</h2>
                     <p className="mt-3 text-sm leading-7 text-[color:var(--color-muted)]">{item.description}</p>
@@ -176,7 +178,7 @@ export default async function DownloadPage() {
             <div className="surface-card rounded-[2rem] p-6">
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-primary)]">Quick Answers</p>
               <div className="mt-5 grid gap-4">
-                {faqs.slice(0, 4).map((item) => (
+                {faqsEn.slice(0, 4).map((item) => (
                   <details key={item.question} className="rounded-[1.4rem] border border-[color:var(--color-line)] bg-white/80 px-5 py-4">
                     <summary className="cursor-pointer list-none text-base font-semibold text-[color:var(--color-ink)]">
                       {item.question}
@@ -192,17 +194,18 @@ export default async function DownloadPage() {
         </section>
 
         <PageCta
+          locale="en"
           eyebrow="Next Step"
-          title="설치 이후에도 지원과 정책 흐름이 같은 구조로 이어집니다."
-          description="다운로드만 제공하는 페이지가 아니라, 막히는 순간 바로 지원과 정책 페이지로 넘어갈 수 있는 허브로 설계했습니다."
+          title="Support and policy links continue in the same design system after installation."
+          description="This page works as more than a download gate. It is also the handoff point into support and policy flows when users need them."
           primaryHref="/support"
-          primaryLabel="지원 보기"
+          primaryLabel="View Support"
           secondaryHref="/privacy"
-          secondaryLabel="정책 보기"
+          secondaryLabel="View Policies"
         />
       </main>
 
-      <SiteFooter />
+      <SiteFooter locale="en" />
     </div>
   );
 }

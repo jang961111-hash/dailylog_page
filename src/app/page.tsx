@@ -1,457 +1,155 @@
 import Image from "next/image";
-import Link from "next/link";
 
-import { DeviceDownloadHub } from "@/components/device-download-hub";
-import { Pill, SectionHeading, SiteFooter, SiteHeader } from "@/components/site-shell";
-import { buildMetadata, siteConfig } from "@/lib/site-config";
-import {
-  faqs,
-  featureStories,
-  flowSteps,
-  heroHighlights,
-  heroStats,
-  previewCards,
-  problemPoints,
-  roadmapPriorities,
-  trustPoints,
-  valueLoopPillars,
-} from "@/lib/site-content";
+import { AppShowcase } from "@/components/app-showcase";
+import { HomeReadingShell } from "@/components/home-reading-shell";
+import { MarketingHomePage } from "@/components/marketing-home-page";
+import { SiteFooter } from "@/components/site-shell";
+import { buildMetadata } from "@/lib/site-config";
 
 export const metadata = buildMetadata();
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-screen overflow-x-clip">
-      <SiteHeader />
-
-      <main className="flex-1">
-        <section className="relative overflow-hidden px-6 pb-20 pt-12 sm:pt-20">
-          <div className="mx-auto grid w-full max-w-7xl gap-14 lg:grid-cols-[0.96fr_1.04fr] lg:items-center">
-            <div className="space-y-8">
-              <div className="space-y-5">
-                <div className="inline-flex rounded-full border border-[color:var(--color-line)] bg-white/75 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-[color:var(--color-sand-700)]">
-                  {siteConfig.release.badge}
-                </div>
-                <h1 className="font-display max-w-4xl text-5xl leading-none tracking-[-0.04em] text-[color:var(--color-ink)] sm:text-6xl lg:text-7xl">
-                  대화로 하루를 기록하고,
-                  <br />
-                  내일의 행동까지 이어가세요.
-                </h1>
-                <p className="max-w-2xl text-sm leading-8 text-[color:var(--color-muted)] sm:text-base">
-                  {siteConfig.description} 웹에서는 서비스 구조와 앱 화면을 먼저 확인하고, 모바일에서는 가장 짧은 경로로 설치까지 이어지도록 설계했습니다.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                {heroHighlights.map((item) => (
-                  <Pill key={item}>{item}</Pill>
-                ))}
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={siteConfig.downloads.androidApk.href ?? "/download"}
-                  download={siteConfig.downloads.androidApk.download}
-                  data-cta-id="hero-android-apk"
-                  className="glow-card inline-flex items-center justify-center rounded-full bg-[color:var(--color-ink)] px-6 py-4 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-[color:var(--color-sand-700)]"
-                >
-                  Android APK 다운로드
-                </a>
-                <Link
-                  href="#how-it-works"
-                  className="inline-flex items-center justify-center rounded-full border border-[color:var(--color-line)] bg-white/80 px-6 py-4 text-sm font-medium text-[color:var(--color-ink)] transition hover:-translate-y-0.5 hover:bg-white"
-                >
-                  흐름 먼저 보기
-                </Link>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-3">
-                {heroStats.map((item) => (
-                  <div
-                    key={item.label}
-                    className="rounded-[1.5rem] border border-[color:var(--color-line)] bg-white/80 px-5 py-5 shadow-[0_18px_44px_rgba(80,57,38,0.06)]"
-                  >
-                    <p className="text-xs uppercase tracking-[0.22em] text-[color:var(--color-sand-600)]">{item.label}</p>
-                    <p className="font-display mt-3 text-4xl leading-none text-[color:var(--color-ink)]">{item.value}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative mx-auto w-full max-w-4xl">
-              <div className="pointer-events-none absolute -left-2 top-10 hidden rounded-[1.5rem] border border-[color:var(--color-line)] bg-white/88 px-5 py-4 shadow-[0_18px_42px_rgba(80,57,38,0.08)] lg:block floating-card">
-                <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-sand-600)]">Core loop</p>
-                <p className="mt-2 text-sm leading-7 text-[color:var(--color-ink)]">
-                  대화
-                  <br />
-                  분석
-                  <br />
-                  추천
-                  <br />
-                  회고
-                </p>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-[1.04fr_0.96fr]">
-                <figure className="relative overflow-hidden rounded-[2.2rem] border border-[color:var(--color-line)] bg-white/90 p-3 shadow-[0_28px_70px_rgba(80,57,38,0.12)] sm:row-span-2">
-                  <Image
-                    src="/images/app-runtime.png"
-                    alt="Daily Log 체크인 진행 화면"
-                    width={1400}
-                    height={2200}
-                    unoptimized
-                    sizes="(max-width: 768px) 100vw, 42vw"
-                    className="h-full w-full rounded-[1.6rem] object-cover"
-                  />
-                </figure>
-
-                <div className="rounded-[2rem] border border-[color:var(--color-line)] bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(247,240,231,0.96))] p-5 shadow-[0_20px_50px_rgba(80,57,38,0.08)]">
-                  <p className="text-xs uppercase tracking-[0.2em] text-[color:var(--color-sand-600)]">Why it feels different</p>
-                  <h2 className="font-display mt-4 text-3xl leading-none text-[color:var(--color-ink)]">
-                    기록만 남기지 않고,
-                    <br />
-                    변화까지 설계합니다.
-                  </h2>
-                  <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">
-                    Daily Log는 감정 분석과 다음 행동 추천까지 하나의 루프로 설계해, 일기가 끝이 아니라 다음 하루를 준비하는 도구가 되도록 만듭니다.
-                  </p>
-                </div>
-
-                <figure className="overflow-hidden rounded-[2rem] border border-[color:var(--color-line)] bg-white/90 p-3 shadow-[0_20px_50px_rgba(80,57,38,0.08)]">
-                  <Image
-                    src="/images/app-diary-ai.png"
-                    alt="Daily Log AI 분석 결과 화면"
-                    width={1200}
-                    height={1800}
-                    unoptimized
-                    sizes="(max-width: 768px) 100vw, 24vw"
-                    className="h-full w-full rounded-[1.5rem] object-cover object-top"
-                  />
-                </figure>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="why-daily-log" className="px-6 py-20">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
-            <SectionHeading
-              eyebrow="Why Daily Log"
-              title="처음 만나는 사용자도 바로 이해할 수 있어야 합니다."
-              description="Daily Log가 해결하려는 문제는 거창하지 않습니다. 기록은 어렵고, 감정은 정리되지 않고, 일상은 행동으로 잘 이어지지 않는다는 아주 현실적인 문제입니다."
+    <HomeReadingShell>
+      <MarketingHomePage
+        hero={{
+          eyebrow: "Daily Log Landing",
+          title: "하루를 짧게 정리하고, 다시 열고 싶은 기록으로 남기세요.",
+          description:
+            "Daily Log는 대화형 체크인으로 하루를 정리하고, 달력과 AI 요약으로 감정 흐름을 한눈에 보여주는 모바일 중심 기록 앱입니다. 랜딩은 설치보다 먼저 제품의 흐름이 읽히도록 설계했습니다.",
+          primaryLabel: "다운로드 보기",
+          secondaryLabel: "제품 흐름 보기",
+          pills: ["3~5분 체크인", "대화형 기록", "AI 요약", "Android APK 제공"],
+          cards: [
+            { label: "Fast Start", title: "첫 화면에서 바로 설치와 제품 흐름을 읽을 수 있게 구성했습니다." },
+            { label: "Clear State", title: "배포 상태와 지원 경로를 같은 화면에서 확인할 수 있습니다." },
+            { label: "Return Loop", title: "예쁜 소개보다 다시 열 이유가 남는 구조를 우선합니다." },
+          ],
+          visual: (
+            <AppShowcase
+              variant="login"
+              alt="Daily Log 로그인과 첫 체크인 화면"
+              priority
+              sizes="(max-width: 1024px) 100vw, 420px"
+              className="h-[31rem] w-full rounded-[1.8rem] sm:h-[34rem]"
             />
-
-            <div className="grid gap-5 lg:grid-cols-3">
-              {problemPoints.map((item, index) => (
-                <article
-                  key={item.title}
-                  className="rounded-[2rem] border border-[color:var(--color-line)] bg-white/82 p-7 shadow-[0_18px_48px_rgba(80,57,38,0.06)]"
-                >
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[color:var(--color-sand-600)]">
-                    Problem 0{index + 1}
-                  </p>
-                  <h2 className="font-display mt-4 text-4xl leading-none text-[color:var(--color-ink)]">{item.title}</h2>
-                  <p className="mt-4 text-sm leading-8 text-[color:var(--color-muted)]">{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="how-it-works" className="px-6 py-20">
-          <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
-            <div className="space-y-8">
-              <SectionHeading
-                eyebrow="How it works"
-                title="대화에서 분석까지, 앱의 핵심 루프를 짧게 이해할 수 있습니다."
-                description="서비스의 설명만으로 끝내지 않고, 실제 앱 화면과 함께 핵심 흐름을 보여줘 사용자가 설치 전에 구조를 이해할 수 있게 합니다."
+          ),
+        }}
+        scenesSection={{
+          eyebrow: "Product Story",
+          title: "한 장면씩 읽히는 구조로 앱의 흐름을 빠르게 이해하게 만듭니다.",
+          description:
+            "Monimo처럼 시야를 넓게 주고, Gemmy처럼 디바이스 장면을 중심에 두되 과한 효과는 줄였습니다. 각 섹션은 메시지 하나와 대표 화면 하나만 강하게 전달합니다.",
+        }}
+        scenes={[
+          {
+            id: "scene-checkin",
+            eyebrow: "Scene 01",
+            title: "시작은 가볍게, 질문은 명확하게.",
+            description:
+              "하루를 기록해야 한다는 부담보다 먼저, 짧은 대화 흐름으로 들어가게 만드는 것이 중요합니다. 첫 장면은 시작 장벽을 낮추는 체크인 경험에 집중합니다.",
+            cards: [
+              { title: "짧은 진입", description: "앱을 열고 바로 대화형 체크인을 시작할 수 있게 구성합니다." },
+              { title: "낮은 부담", description: "긴 글을 쓰기 전에 질문 한두 개로 오늘의 상태를 정리합니다." },
+              { title: "모바일 우선", description: "설치 이후 가장 먼저 보는 장면이 자연스럽게 이어지도록 랜딩과 앱 톤을 맞춥니다." },
+              { title: "즉시 이해", description: "로그인 화면에서도 제품이 어떤 흐름인지 바로 읽히게 합니다." },
+            ],
+            visual: (
+              <AppShowcase
+                variant="login"
+                alt="Daily Log 체크인 시작 화면"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="h-[28rem] w-full rounded-[1.5rem] sm:h-[32rem]"
               />
-
-              <div className="grid gap-4">
-                {flowSteps.map((item) => (
-                  <article
-                    key={item.step}
-                    className="rounded-[1.7rem] border border-[color:var(--color-line)] bg-white/80 px-5 py-5 shadow-[0_14px_34px_rgba(80,57,38,0.05)]"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[color:var(--color-sand-100)] text-sm font-semibold text-[color:var(--color-sand-700)]">
-                        {item.step}
-                      </div>
-                      <div>
-                        <h3 className="font-display text-3xl leading-none text-[color:var(--color-ink)]">{item.title}</h3>
-                        <p className="mt-3 text-sm leading-7 text-[color:var(--color-muted)]">{item.description}</p>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            <div className="grid gap-5">
-              <figure className="overflow-hidden rounded-[2rem] border border-[color:var(--color-line)] bg-white/88 p-3 shadow-[0_22px_60px_rgba(80,57,38,0.08)]">
-                <Image
-                  src="/images/app-runtime.png"
-                  alt="Daily Log 체크인 진행 화면"
-                  width={1400}
-                  height={2200}
-                  unoptimized
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="h-[32rem] w-full rounded-[1.6rem] object-cover object-top"
-                />
-              </figure>
-              <div className="grid gap-5 md:grid-cols-2">
-                <div className="rounded-[1.8rem] border border-[color:var(--color-line)] bg-[color:var(--color-cream-0)] p-6">
-                  <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-sand-600)]">Product note</p>
-                  <h3 className="font-display mt-4 text-3xl leading-none text-[color:var(--color-ink)]">짧은 설명보다 실제 화면이 먼저 보이게</h3>
-                  <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">
-                    랜딩 첫 인상에서 앱이 어떤 제품인지 바로 드러나도록, 스크린샷과 기능 설명을 함께 묶었습니다.
-                  </p>
-                </div>
-                <div className="rounded-[1.8rem] border border-[color:var(--color-line)] bg-white/82 p-6 shadow-[0_16px_42px_rgba(80,57,38,0.05)]">
-                  <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-sand-600)]">Trust signal</p>
-                  <h3 className="font-display mt-4 text-3xl leading-none text-[color:var(--color-ink)]">설치 전 불안을 줄이는 정보 구조</h3>
-                  <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">
-                    다운로드, 정책, 지원을 한 흐름 안에 배치해 사용자가 설치 직전 필요한 정보를 빠르게 찾을 수 있습니다.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="preview" className="px-6 py-20">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-12">
-            <SectionHeading
-              eyebrow="Product proof"
-              title="앱 프리뷰를 중심에 두고 제품의 차별점을 설명합니다."
-              description="감성적인 분위기만 전달하는 랜딩이 아니라, 실제 화면과 결과 중심 카피로 Daily Log가 어떤 제품인지 명확하게 보여줍니다."
-            />
-
-            <div className="grid gap-8">
-              {featureStories.map((item, index) => (
-                <article
-                  key={item.title}
-                  className="grid gap-6 rounded-[2.2rem] border border-[color:var(--color-line)] bg-white/82 p-5 shadow-[0_20px_52px_rgba(80,57,38,0.06)] lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:p-6"
-                >
-                  <div className={index % 2 === 1 ? "lg:order-2" : undefined}>
-                    <div className="overflow-hidden rounded-[1.8rem] border border-[color:var(--color-line)] bg-[color:var(--color-cream-0)] p-3">
-                      <Image
-                        src={item.image}
-                        alt={item.imageAlt}
-                        width={1400}
-                        height={2200}
-                        unoptimized
-                        sizes="(max-width: 1024px) 100vw, 32vw"
-                        className="h-[28rem] w-full rounded-[1.4rem] object-cover object-top"
-                      />
-                    </div>
-                  </div>
-                  <div className={`space-y-5 ${index % 2 === 1 ? "lg:order-1" : ""}`}>
-                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--color-sand-600)]">
-                      {item.eyebrow}
-                    </p>
-                    <h2 className="font-display text-4xl leading-none text-[color:var(--color-ink)] sm:text-5xl">{item.title}</h2>
-                    <p className="text-sm leading-8 text-[color:var(--color-muted)] sm:text-base">{item.description}</p>
-                    <div className="rounded-[1.5rem] bg-[color:var(--color-cream-0)] px-5 py-4 text-sm leading-7 text-[color:var(--color-muted)]">
-                      <strong className="text-[color:var(--color-ink)]">제품 증거</strong>
-                      <p className="mt-2">{item.supportingPoint}</p>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-
-            <div className="grid gap-5 lg:grid-cols-4">
-              {previewCards.map((item) => (
-                <article
-                  key={item.title}
-                  className="overflow-hidden rounded-[1.9rem] border border-[color:var(--color-line)] bg-white/84 shadow-[0_18px_48px_rgba(80,57,38,0.05)]"
-                >
-                  <div className="border-b border-[color:var(--color-line)] px-5 py-5">
-                    <p className="text-xs uppercase tracking-[0.18em] text-[color:var(--color-sand-600)]">App preview</p>
-                    <h3 className="font-display mt-3 text-3xl leading-none text-[color:var(--color-ink)]">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-[color:var(--color-muted)]">{item.description}</p>
-                  </div>
-                  <div className="bg-[color:var(--color-cream-0)] p-3">
-                    <Image
-                      src={item.image}
-                      alt={item.imageAlt}
-                      width={1200}
-                      height={1800}
-                      unoptimized
-                      sizes="(max-width: 1024px) 100vw, 22vw"
-                      className="h-[24rem] w-full rounded-[1.3rem] object-cover object-top"
-                    />
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="value-loop" className="px-6 py-20">
-          <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="space-y-8">
-              <SectionHeading
-                eyebrow="Why users come back"
-                title="이 서비스가 시간을 계속 받을 수 있으려면 다시 열 이유가 보여야 합니다."
-                description="지금의 핵심 훅은 충분히 매력적이지만, 장기 사용과 지불 의향은 결국 반복 사용 루프와 누적 가치에서 결정됩니다."
+            ),
+          },
+          {
+            id: "scene-dashboard",
+            eyebrow: "Scene 02",
+            title: "달력과 AI가 오늘의 기록을 한눈에 다시 정리합니다.",
+            description:
+              "체크인 후에는 쌓인 기록이 다시 열 이유가 되어야 합니다. 달력 홈, 감정 흐름, 말풍선 요약처럼 핵심 회고 장면을 하나의 집중 섹션으로 보여줍니다.",
+            tone: "dark",
+            cards: [
+              { title: "한눈에 보는 달력", description: "날짜별 기록 여부와 흐름이 즉시 보이도록 메인 홈을 설계합니다." },
+              { title: "말풍선 요약", description: "오늘 남지 않은 기록이나 핵심 상태를 짧은 문장으로 바로 확인합니다." },
+              { title: "가벼운 glow", description: "디바이스 뒤쪽에만 약한 halo를 넣어 시선을 집중시키고, 나머지는 절제합니다." },
+              { title: "반복 사용 유도", description: "다음 체크인보다 먼저 누적된 기록의 가치를 느끼게 합니다." },
+            ],
+            visual: (
+              <AppShowcase
+                variant="dashboard"
+                alt="Daily Log 달력 홈과 AI 말풍선 화면"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="h-[28rem] w-full rounded-[1.5rem] sm:h-[33rem]"
               />
-
-              <div className="rounded-[2rem] border border-[color:var(--color-line)] bg-[linear-gradient(135deg,rgba(43,38,32,0.98),rgba(97,69,46,0.96))] p-7 text-white shadow-[0_24px_60px_rgba(55,36,22,0.18)]">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">Current verdict</p>
-                <h2 className="font-display mt-4 text-4xl leading-none">
-                  한 번은 써볼 만하지만,
-                  <br />
-                  오래 쓰게 만들 이유는 다음 배치에서 만듭니다.
-                </h2>
-                <p className="mt-4 text-sm leading-8 text-white/80">
-                  Daily Log는 대화형 기록과 감정 해석이라는 훅은 분명합니다. 이제는 첫 세션 가치, 재방문 루프, 데이터 소유권, 누적 인사이트를 더해 실제로 남게 만드는 단계가 필요합니다.
-                </p>
-                <Link
-                  href="/roadmap"
-                  className="mt-5 inline-flex rounded-full bg-white px-5 py-3 text-sm font-medium text-[color:var(--color-ink)] transition hover:bg-[color:var(--color-cream-0)]"
-                >
-                  제품 로드맵 보기
-                </Link>
-              </div>
-            </div>
-
-            <div className="grid gap-5">
-              {valueLoopPillars.map((item) => (
-                <article
-                  key={item.title}
-                  className="rounded-[1.8rem] border border-[color:var(--color-line)] bg-white/82 p-6 shadow-[0_18px_48px_rgba(80,57,38,0.05)]"
-                >
-                  <h3 className="font-display text-3xl leading-none text-[color:var(--color-ink)]">{item.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-6 py-20">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
-            <SectionHeading
-              eyebrow="Next up"
-              title="다음 단계는 웹보다도 제품 재방문성과 추천 품질에 집중합니다."
-              description="웹은 계속 설치와 신뢰 허브 역할을 맡고, 제품 투자는 앱의 첫 세션 가치, 반복 사용 루프, 신뢰와 데이터 소유권 강화에 우선 배정합니다."
-            />
-
-            <div className="grid gap-5 lg:grid-cols-3">
-              {roadmapPriorities.slice(0, 3).map((item) => (
-                <article
-                  key={item.title}
-                  className="rounded-[2rem] border border-[color:var(--color-line)] bg-white/84 p-6 shadow-[0_18px_48px_rgba(80,57,38,0.05)]"
-                >
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[color:var(--color-sand-600)]">{item.eyebrow}</p>
-                  <h3 className="font-display mt-4 text-3xl leading-none text-[color:var(--color-ink)]">{item.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">{item.summary}</p>
-                  <ul className="mt-5 space-y-3 text-sm leading-7 text-[color:var(--color-muted)]">
-                    {item.deliverables.map((deliverable) => (
-                      <li key={deliverable} className="rounded-[1rem] bg-[color:var(--color-cream-0)] px-4 py-3">
-                        {deliverable}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-6 py-20">
-          <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr]">
-            <div className="space-y-8">
-              <SectionHeading
-                eyebrow="Trust"
-                title="설치 유도만큼 중요한 것은 신뢰를 잃지 않는 정보 설계입니다."
-                description="데모 단계라도 서비스처럼 보여야 합니다. 그래서 권한, 정책, 지원 정보를 같은 경험 안에서 자연스럽게 연결했습니다."
+            ),
+          },
+          {
+            id: "scene-ai",
+            eyebrow: "Scene 03",
+            title: "대화와 장면이 쌓이면, 기록은 다시 꺼내볼 자산이 됩니다.",
+            description:
+              "사진과 문장, AI 분석이 분리되지 않고 한 흐름에서 이어질 때 회고의 밀도가 높아집니다. 세 번째 장면은 설치 이후 쌓이는 가치와 기록 보관 경험을 강조합니다.",
+            cards: [
+              { title: "사진 기반 회고", description: "이미지와 텍스트를 함께 남겨 하루의 장면을 더 또렷하게 저장합니다." },
+              { title: "AI 해석", description: "감정 변화와 요약 포인트를 사람이 다시 읽기 쉬운 방식으로 정리합니다." },
+              { title: "다음 행동", description: "기록이 끝나고 나면 다음에 무엇을 할지까지 자연스럽게 연결합니다." },
+              { title: "차분한 보관", description: "불필요한 장식보다 다시 꺼내보기 쉬운 밀도와 구조를 우선합니다." },
+            ],
+            visual: (
+              <Image
+                src="/images/app-diary-photo.webp"
+                alt="Daily Log 사진 기반 일기와 AI 정리 화면"
+                width={1400}
+                height={2200}
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="h-[28rem] w-full rounded-[1.5rem] object-cover object-top sm:h-[33rem]"
               />
-
-              <div className="rounded-[2rem] border border-[color:var(--color-line)] bg-[linear-gradient(135deg,rgba(43,38,32,0.98),rgba(97,69,46,0.96))] p-7 text-white shadow-[0_24px_60px_rgba(55,36,22,0.18)]">
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/70">Demo status</p>
-                <h2 className="font-display mt-4 text-4xl leading-none">정직한 데모 표기와 운영형 구조를 함께 유지합니다.</h2>
-                <p className="mt-4 text-sm leading-8 text-white/80">
-                  현재는 Android 공개 APK 중심의 배포지만, 정책과 지원, 설치 안내를 정식 서비스처럼 정리해 사용자 신뢰를 해치지 않도록 구성했습니다.
-                </p>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <Link href="/privacy" className="rounded-full bg-white/10 px-4 py-2 text-sm text-white transition hover:bg-white/16">
-                    개인정보처리방침
-                  </Link>
-                  <Link href="/terms" className="rounded-full bg-white/10 px-4 py-2 text-sm text-white transition hover:bg-white/16">
-                    이용약관
-                  </Link>
-                  <Link href="/support" className="rounded-full bg-white/10 px-4 py-2 text-sm text-white transition hover:bg-white/16">
-                    지원 허브
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid gap-5 md:grid-cols-3">
-              {trustPoints.map((item) => (
-                <article
-                  key={item.title}
-                  className="rounded-[1.8rem] border border-[color:var(--color-line)] bg-white/82 p-6 shadow-[0_18px_48px_rgba(80,57,38,0.05)]"
-                >
-                  <h3 className="font-display text-3xl leading-none text-[color:var(--color-ink)]">{item.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">{item.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="faq" className="px-6 py-20">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
-            <SectionHeading
-              eyebrow="FAQ"
-              title="설치 전, 가장 많이 묻는 질문부터 빠르게 정리했습니다."
-              description="처음 방문한 사용자도 궁금한 점을 바로 해결할 수 있어야 전환이 이어집니다. 설치, 플랫폼 상태, 정책, 문의 흐름을 한곳에 모았습니다."
-              align="center"
-            />
-
-            <div className="mx-auto grid w-full max-w-4xl gap-4">
-              {faqs.map((item) => (
-                <details
-                  key={item.question}
-                  className="group rounded-[1.5rem] border border-[color:var(--color-line)] bg-white/86 px-5 py-4 shadow-[0_14px_36px_rgba(80,57,38,0.05)]"
-                >
-                  <summary className="cursor-pointer list-none text-left text-base font-semibold text-[color:var(--color-ink)]">
-                    {item.question}
-                  </summary>
-                  <p className="mt-4 border-t border-[color:var(--color-line)] pt-4 text-sm leading-7 text-[color:var(--color-muted)]">
-                    {item.answer}
-                  </p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="px-6 pb-10 pt-8">
-          <div className="mx-auto w-full max-w-7xl rounded-[2.6rem] border border-[color:var(--color-line)] bg-[linear-gradient(135deg,rgba(255,255,255,0.92),rgba(244,235,223,0.96))] px-6 py-10 shadow-[0_30px_80px_rgba(80,57,38,0.08)] md:px-10">
-            <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
-              <div className="space-y-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[color:var(--color-sand-600)]">Final CTA</p>
-                <h2 className="font-display text-4xl leading-none text-[color:var(--color-ink)] sm:text-5xl">
-                  설명은 충분히 짧게,
-                  <br />
-                  설치 흐름은 충분히 분명하게.
-                </h2>
-                <p className="text-sm leading-8 text-[color:var(--color-muted)]">
-                  Daily Log의 Android APK 다운로드, 지원 페이지, 정책 문서를 한 번에 확인할 수 있습니다. 지금은 공개 APK 중심 배포 단계이며, 공개형 서비스처럼 다듬은 랜딩 구조를 기준으로 설계했습니다.
-                </p>
-              </div>
-              <DeviceDownloadHub compact className="bg-white/95" />
-            </div>
-          </div>
-        </section>
-      </main>
-
+            ),
+          },
+        ]}
+        values={{
+          eyebrow: "Why It Works",
+          title: "한 번에 다 설명하지 않아도, 핵심 가치가 빠르게 읽히는 구조입니다.",
+          description:
+            "홈은 제품의 모든 기능을 나열하지 않습니다. 대신 설치, 반복 사용, 신뢰, 지원 흐름처럼 실제 전환과 재방문에 영향을 주는 요소만 짧게 압축합니다.",
+          cards: [
+            {
+              title: "설치와 이해를 같은 시야 안에 둡니다.",
+              description:
+                "첫 화면에서 바로 다운로드로 밀어붙이기보다, 설치 이유와 제품 흐름이 함께 읽히는 구성을 만들어 전환의 부담을 줄입니다.",
+              tone: "accent",
+            },
+            {
+              title: "메시지는 짧게, 디바이스는 크게.",
+              description: "각 장면이 전달하는 메시지를 하나로 줄이고 대표 스크린을 크게 보여주어 정보가 흩어지지 않게 합니다.",
+            },
+            {
+              title: "밝은 베이스 위에 선택적 집중만 더합니다.",
+              description: "사이트 전체는 밝고 가벼운 톤을 유지하고, 핵심 장면에만 dark glow를 써서 시선을 모읍니다.",
+            },
+            {
+              title: "지원과 정책도 제품 흐름의 일부로 둡니다.",
+              description: "설치 후 막히는 지점, 정책 확인, 로드맵 확인을 모두 같은 네비게이션 안에 배치해 신뢰를 높입니다.",
+            },
+          ],
+        }}
+        finalCta={{
+          eyebrow: "Ready To Start",
+          title: "랜딩은 짧게 읽히고, 실제 설치와 지원은 더 빠르게 이어지게 했습니다.",
+          description:
+            "지금은 Android APK를 중심으로 가장 짧은 설치 경로를 제공합니다. 더 자세한 가이드, 지원, 정책 문서는 각각의 페이지에서 같은 디자인 흐름으로 이어집니다.",
+          primaryLabel: "다운로드 페이지",
+          secondaryLabel: "지원 보기",
+          footerLinks: [
+            { href: "/roadmap", label: "로드맵" },
+            { href: "/privacy", label: "개인정보처리방침" },
+            { href: "/terms", label: "이용약관" },
+          ],
+        }}
+      />
       <SiteFooter />
-    </div>
+    </HomeReadingShell>
   );
 }

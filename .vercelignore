@@ -1,0 +1,8 @@
+node_modules
+.git
+.next
+output
+.playwright-cli
+.tmp-playwright
+.tmp-run
+release-assets

@@ -1,49 +1,51 @@
 import { PageCta, PageIntro, SectionHeading, SiteFooter, SiteHeader } from "@/components/site-shell";
-import { buildMetadata } from "@/lib/site-config";
 import {
-  ownershipChecklist,
-  paidValueTracks,
-  roadmapPriorities,
-  validationPlans,
-} from "@/lib/site-content";
+  ownershipChecklistEn,
+  paidValueTracksEn,
+  roadmapPrioritiesEn,
+  validationPlansEn,
+} from "@/lib/content/roadmap-content-en";
+import { buildMetadata } from "@/lib/site-config";
 
 export const metadata = buildMetadata({
-  title: "제품 로드맵",
-  description: "Daily Log가 반복 사용되는 서비스가 되기 위해 다음 단계에서 집중할 제품 우선순위와 검증 기준을 정리한 페이지입니다.",
-  path: "/roadmap",
+  title: "Product roadmap",
+  description:
+    "See the next product priorities, validation criteria, and trust-related work that Daily Log should focus on after the current demo release.",
+  path: "/en/roadmap",
+  locale: "en",
 });
 
-export default function RoadmapPage() {
+export default function EnglishRoadmapPage() {
   return (
     <div className="min-h-screen">
       <SiteHeader />
 
-      <main className="reading-surface flex-1">
+      <main lang="en" className="reading-surface flex-1">
         <PageIntro
           eyebrow="Roadmap"
-          title="예쁜 체험에서 끝나지 않고, 다시 열게 만드는 제품으로 가는 다음 단계입니다."
-          description="로드맵 페이지는 웹사이트 장식보다 제품의 반복 사용성과 누적 가치를 먼저 설명합니다. 무엇을 만들지보다 왜 그 순서인지가 먼저 읽히도록 정리했습니다."
+          title="The next step is not a prettier demo, but a product people return to."
+          description="This roadmap focuses on repeat value and accumulated reflection instead of surface polish. The page is organized so the reason behind the sequence is visible before the feature list itself."
           aside={
             <div className="grid gap-4">
               <div className="surface-card rounded-[1.8rem] p-6">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-primary)]">Current View</p>
                 <p className="mt-4 font-display text-4xl font-semibold tracking-[-0.05em] text-[color:var(--color-ink)]">
-                  먼저 써볼 가치,
+                  First make it worth trying.
                   <br />
-                  다음은 다시 열 이유.
+                  Then make it worth reopening.
                 </p>
                 <p className="mt-4 text-sm leading-7 text-[color:var(--color-muted)]">
-                  지금 단계의 핵심은 다운로드 수보다 첫 세션 만족도와 재방문 이유를 얼마나 강하게 만드는지입니다.
+                  At this stage, first-session satisfaction and repeat value matter more than raw download counts.
                 </p>
               </div>
 
               <div className="surface-card-dark rounded-[1.8rem] p-6 text-white">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/62">Focus</p>
                 <p className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-white">
-                  AI 회고 도구로서의 반복 사용 가치를 먼저 올립니다.
+                  Improve the repeated value of the AI reflection experience first.
                 </p>
                 <p className="mt-4 text-sm leading-7 text-white/72">
-                  웹은 설치와 신뢰 허브 역할을 하고, 실제 제품 경쟁력은 모바일 안에서 검증합니다.
+                  The website acts as the install and trust hub, while the real product leverage is measured on mobile.
                 </p>
               </div>
             </div>
@@ -55,25 +57,25 @@ export default function RoadmapPage() {
             <div className="space-y-4">
               <SectionHeading
                 eyebrow="Current Diagnosis"
-                title="현재 판단은 꽤 분명합니다."
-                description="대화형 기록과 감정 해석은 충분히 매력적입니다. 이제는 예쁜 첫 경험보다 반복 사용과 누적 가치가 더 강하게 느껴져야 합니다."
+                title="The current diagnosis is already fairly clear."
+                description="Conversational reflection and mood interpretation are compelling. What needs to grow next is the reason to come back and the value that accumulates with repeated use."
               />
 
               <div className="surface-card-dark rounded-[1.8rem] p-6 text-white">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/62">What changes next</p>
                 <p className="mt-4 font-display text-4xl font-semibold tracking-[-0.05em] text-white">
-                  일기 앱을 넘어서
+                  Move beyond a journal demo
                   <br />
-                  반복 사용되는 회고 도구로 갑니다.
+                  and become a reflection tool people reopen.
                 </p>
                 <p className="mt-4 text-sm leading-7 text-white/72">
-                  다음 단계의 성공 기준은 다운로드 수보다 다시 열기, 추천 실행, 기록 축적 가치입니다.
+                  The next success criteria are repeat usage, recommendation follow-through, and the felt value of accumulated notes.
                 </p>
               </div>
             </div>
 
             <div className="grid gap-5">
-              {roadmapPriorities.slice(0, 3).map((item) => (
+              {roadmapPrioritiesEn.slice(0, 3).map((item) => (
                 <article key={item.title} className="surface-card-soft rounded-[1.8rem] p-6">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-primary)]">{item.eyebrow}</p>
                   <h3 className="mt-4 font-display text-3xl font-semibold tracking-[-0.04em] text-[color:var(--color-ink)]">{item.title}</h3>
@@ -88,12 +90,12 @@ export default function RoadmapPage() {
           <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
             <SectionHeading
               eyebrow="Priorities"
-              title="다음 배치에서 해결할 순서를 제품 언어로 정리했습니다."
-              description="모든 것을 동시에 늘리는 대신, 반복 사용과 신뢰를 강하게 만드는 순서로 우선순위를 배치했습니다."
+              title="The next batch is organized in the order that strengthens repeat use and trust."
+              description="Instead of expanding everything at once, the roadmap follows the sequence most likely to make the product feel stronger over time."
             />
 
             <div className="grid gap-5 xl:grid-cols-2">
-              {roadmapPriorities.map((item, index) => (
+              {roadmapPrioritiesEn.map((item, index) => (
                 <article
                   key={item.title}
                   className={`${index === 0 ? "surface-card-dark text-white" : "surface-card-soft"} rounded-[1.8rem] p-6`}
@@ -132,12 +134,12 @@ export default function RoadmapPage() {
             <div className="space-y-4">
               <SectionHeading
                 eyebrow="Validation"
-                title="좋아 보이는 기능보다 먼저 검증할 지표입니다."
-                description="다음 단계는 감이 아니라 지표와 인터뷰 질문으로 판단해야 합니다. 사용자가 정말 더 명확함과 회고 가치를 느끼는지가 중요합니다."
+                title="These are the signals worth validating before adding more polish."
+                description="The next stage should be measured with metrics and interviews, not just instinct. The key question is whether people actually feel more clarity and more reason to return."
               />
 
               <div className="grid gap-4">
-                {validationPlans.map((item) => (
+                {validationPlansEn.map((item) => (
                   <article key={item.title} className="surface-card-soft rounded-[1.6rem] p-5">
                     <h3 className="font-display text-2xl font-semibold tracking-[-0.04em] text-[color:var(--color-ink)]">{item.title}</h3>
                     <div className="mt-4 flex flex-wrap gap-3">
@@ -159,10 +161,10 @@ export default function RoadmapPage() {
               <article className="surface-card rounded-[1.8rem] p-6">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-primary)]">Trust & Ownership</p>
                 <h3 className="mt-4 font-display text-4xl font-semibold tracking-[-0.05em] text-[color:var(--color-ink)]">
-                  민감한 기록 서비스는 기능보다 먼저 신뢰를 만들어야 합니다.
+                  A sensitive reflection product has to earn trust before anything else.
                 </h3>
                 <ul className="mt-5 grid gap-3 text-sm leading-7 text-[color:var(--color-muted)]">
-                  {ownershipChecklist.map((item) => (
+                  {ownershipChecklistEn.map((item) => (
                     <li key={item} className="rounded-[1rem] border border-[color:var(--color-line)] bg-[color:var(--color-surface-alt)]/70 px-4 py-3">
                       {item}
                     </li>
@@ -173,13 +175,13 @@ export default function RoadmapPage() {
               <article className="surface-card-soft rounded-[1.8rem] p-6">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-primary)]">Paid Direction</p>
                 <h3 className="mt-4 font-display text-4xl font-semibold tracking-[-0.05em] text-[color:var(--color-ink)]">
-                  과금은 누적 가치가 분명해진 뒤에 여는 편이 맞습니다.
+                  Paid features should open only after the long-term value is unmistakable.
                 </h3>
                 <p className="mt-4 text-sm leading-8 text-[color:var(--color-muted)]">
-                  무료 구간의 유용함이 충분히 증명된 뒤에, 더 깊은 인사이트와 관리 편의 영역에서 과금 방향을 여는 것이 자연스럽습니다.
+                  The free experience needs to feel genuinely useful first. Deeper insights and accumulated value are the more natural place to introduce payment later.
                 </p>
                 <ul className="mt-5 grid gap-3 text-sm leading-7 text-[color:var(--color-muted)]">
-                  {paidValueTracks.map((item) => (
+                  {paidValueTracksEn.map((item) => (
                     <li key={item} className="rounded-[1rem] border border-[color:var(--color-line)] bg-white/80 px-4 py-3">
                       {item}
                     </li>
@@ -191,17 +193,18 @@ export default function RoadmapPage() {
         </section>
 
         <PageCta
+          locale="en"
           eyebrow="Next Step"
-          title="웹은 신뢰 허브로 남기고, 제품의 승부는 모바일 안에서 보겠습니다."
-          description="랜딩을 더 화려하게 만드는 것보다 첫 세션 가치, 재방문, 추천 품질, 데이터 소유권을 실제 제품에서 강화하는 일이 우선입니다."
+          title="The website stays the trust hub, while the real product test happens on mobile."
+          description="The higher-leverage work now is strengthening first-session value, repeat use, recommendation quality, and user control inside the product itself."
           primaryHref="/download"
-          primaryLabel="APK 다운로드"
+          primaryLabel="Download APK"
           secondaryHref="/support"
-          secondaryLabel="지원 보기"
+          secondaryLabel="Open Support"
         />
       </main>
 
-      <SiteFooter />
+      <SiteFooter locale="en" />
     </div>
   );
 }
