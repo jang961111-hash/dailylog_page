@@ -14,10 +14,10 @@ export default function HomePage() {
     <HomeReadingShell>
       <MarketingHomePage
         hero={{
-          eyebrow: "Daily Log Landing",
-          title: "하루를 짧게 정리하고, 다시 열고 싶은 기록으로 남기세요.",
+          eyebrow: "Daily Log",
+          title: "하루를 쉽게 정리하고, 다시 열고 싶은 기록으로 남겨드릴게요.",
           description:
-            "Daily Log는 대화형 체크인으로 하루를 정리하고, 달력과 AI 요약으로 감정 흐름을 한눈에 보여주는 모바일 중심 기록 앱입니다. 랜딩은 설치보다 먼저 제품의 흐름이 읽히도록 설계했습니다.",
+            "Daily Log는 AI음성으로 대화를 통해 하루를 정리하고, 감정 분석을 통해 사용자의 감정 흐름을 한눈에 보여주는 모바일 중심 AI 기록 서비스입니다.",
           primaryLabel: "다운로드 보기",
           secondaryLabel: "제품 흐름 보기",
           pills: ["3~5분 체크인", "대화형 기록", "AI 요약", "Android APK 제공"],

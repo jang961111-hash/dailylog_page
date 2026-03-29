@@ -83,7 +83,7 @@ export function MarketingHomePage({
           <div className="reveal-block inline-flex rounded-full border border-[color:var(--color-line)] bg-white/78 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[color:var(--color-primary)]">
             {hero.eyebrow}
           </div>
-          <h1 className="reveal-block reveal-delay-1 display-hero mt-6 max-w-[11ch] font-display text-5xl font-semibold text-[color:var(--color-ink)] sm:text-6xl lg:text-7xl">
+          <h1 className="reveal-block reveal-delay-1 display-hero mt-5 max-w-[13ch] font-display text-5xl font-semibold text-[color:var(--color-ink)] sm:text-6xl lg:text-7xl">
             {hero.title}
           </h1>
           <p className="reveal-block reveal-delay-2 copy-readable copy-readable-wide mt-6 text-sm text-[color:var(--color-muted)] sm:text-base">

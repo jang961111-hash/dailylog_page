@@ -21,7 +21,7 @@ export default function EnglishHomePage() {
       <MarketingHomePage
         locale="en"
         hero={{
-          eyebrow: "Daily Log Landing",
+          eyebrow: "Daily Log",
           title: "Wrap up the day quickly, and leave with something worth reopening.",
           description:
             "Daily Log is a mobile-first journal built around a conversational check-in, a calendar view of the day, and AI summaries that help you return to your notes later. The landing page is designed to make that flow readable at a glance.",

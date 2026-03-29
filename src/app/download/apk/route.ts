@@ -4,13 +4,50 @@ import { Readable } from "node:stream";
 import { NextResponse } from "next/server";
 
 import { findLocalAndroidApk } from "@/lib/apk-release";
-import { androidReleaseFallbackAssetUrl, githubReleaseRepo } from "@/lib/site-config";
+import {
+  androidReleaseFallbackAssetUrl,
+  androidReleaseFallbackTag,
+  githubReleaseRepo,
+} from "@/lib/site-config";
 
 export const runtime = "nodejs";
 
+const taggedReleaseApiUrl = `https://api.github.com/repos/${githubReleaseRepo.owner}/${githubReleaseRepo.name}/releases/tags/${androidReleaseFallbackTag}`;
 const latestReleaseApiUrl = `https://api.github.com/repos/${githubReleaseRepo.owner}/${githubReleaseRepo.name}/releases/latest`;
 
+type GitHubRelease = {
+  assets?: Array<{
+    name?: string;
+    browser_download_url?: string;
+  }>;
+};
+
+async function resolveGitHubApkRelease(url: string) {
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/vnd.github+json",
+      "User-Agent": "DailyLogLanding",
+    },
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const release = (await response.json()) as GitHubRelease;
+  const androidAsset = release.assets?.find((asset) => asset.name?.toLowerCase().endsWith(".apk"));
+
+  return androidAsset?.browser_download_url ?? null;
+}
+
 export async function GET() {
+  const forcedApkUrl = process.env.ANDROID_APK_URL?.trim();
+
+  if (forcedApkUrl) {
+    return NextResponse.redirect(forcedApkUrl);
+  }
+
   try {
     const localApk = await findLocalAndroidApk();
 
@@ -31,31 +68,19 @@ export async function GET() {
   }
 
   try {
-    const response = await fetch(latestReleaseApiUrl, {
-      headers: {
-        Accept: "application/vnd.github+json",
-        "User-Agent": "DailyLogLanding",
-      },
-      cache: "no-store",
-    });
+    const taggedReleaseAssetUrl = await resolveGitHubApkRelease(taggedReleaseApiUrl);
 
-    if (response.ok) {
-      const release = (await response.json()) as {
-        assets?: Array<{
-          name?: string;
-          browser_download_url?: string;
-        }>;
-      };
-      const androidAsset = release.assets?.find((asset) => asset.name?.toLowerCase().endsWith(".apk"));
+    if (taggedReleaseAssetUrl) {
+      return NextResponse.redirect(taggedReleaseAssetUrl);
+    }
 
-      if (androidAsset?.browser_download_url) {
-        return NextResponse.redirect(androidAsset.browser_download_url);
-      }
-    } else {
-      console.error(`Failed to fetch latest GitHub release: ${response.status} ${response.statusText}`);
+    const latestReleaseAssetUrl = await resolveGitHubApkRelease(latestReleaseApiUrl);
+
+    if (latestReleaseAssetUrl) {
+      return NextResponse.redirect(latestReleaseAssetUrl);
     }
   } catch (error) {
-    console.error("Unable to resolve the latest GitHub APK release.", error);
+    console.error("Unable to resolve the GitHub APK release.", error);
   }
 
   return NextResponse.redirect(androidReleaseFallbackAssetUrl);
