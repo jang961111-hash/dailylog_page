@@ -17,8 +17,9 @@ export const githubReleaseRepo = {
   name: "dailylog_page",
 } as const;
 
-const androidReleaseFallbackTag = "android-demo-v1.0.2";
-const androidReleaseFallbackAssetName = "DailyLog_1.0.2.apk";
+const androidReleaseVersion = "1.0.12";
+const androidReleaseFallbackTag = `android-demo-v${androidReleaseVersion}`;
+const androidReleaseFallbackAssetName = `DailyLog_${androidReleaseVersion}.apk`;
 export const androidReleaseFallbackAssetUrl = `https://github.com/${githubReleaseRepo.owner}/${githubReleaseRepo.name}/releases/download/${androidReleaseFallbackTag}/${androidReleaseFallbackAssetName}`;
 const androidReleaseRoute = "/download/apk";
 
@@ -38,10 +39,10 @@ export const siteConfig = {
   releaseStatus: "live" as ReleaseStatus,
   release: {
     badge: "Android APK",
-    versionLabel: "DailyLog APK v1.0.2",
+    versionLabel: `DailyLog APK v${androidReleaseVersion}`,
     supportedOs: "Android 10 이상 권장",
-    fileSize: "약 335MB",
-    lastUpdated: "2026-03-26",
+    fileSize: "약 332.0MB",
+    lastUpdated: "2026-03-29",
   },
   downloads: {
     androidApk: {
@@ -92,7 +93,7 @@ export const siteLocaleCopy = {
       "Daily Log is a mobile-first journaling experience that helps you reflect on the day through a 3-5 minute conversational check-in, mood insight, and a practical next step.",
     supportResponseTime: "1-2 business days",
     supportedOs: "Recommended for Android 10 or later",
-    fileSize: "About 335 MB",
+    fileSize: "About 332.0 MB",
     ogImageAlt: `${siteConfig.name} app preview`,
   },
 } as const;

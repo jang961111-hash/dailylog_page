@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { AppShowcase } from "@/components/app-showcase";
+import { HomeDownloadSection } from "@/components/home-download-section";
 import { HomeReadingShell } from "@/components/home-reading-shell";
 import { MarketingHomePage } from "@/components/marketing-home-page";
 import { SiteFooter } from "@/components/site-shell";
@@ -149,6 +150,7 @@ export default function HomePage() {
           ],
         }}
       />
+      <HomeDownloadSection />
       <SiteFooter />
     </HomeReadingShell>
   );
